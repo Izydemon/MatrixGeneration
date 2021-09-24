@@ -11,6 +11,11 @@ package ui;
  */
 public class main extends javax.swing.JFrame {
 
+    int[][] matrix = new int[10][10];
+    int minimum = 0;
+    int maximum = 0;
+    int limit = 0;
+    
     /**
      * Creates new form main
      */
@@ -27,22 +32,234 @@ public class main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ControlPanel = new javax.swing.JPanel();
+        MinimumLabel = new javax.swing.JLabel();
+        MinimumTextField = new javax.swing.JTextField();
+        MaximumLabel = new javax.swing.JLabel();
+        MaximumTextField = new javax.swing.JTextField();
+        Slider = new javax.swing.JSlider();
+        ResetButton = new javax.swing.JButton();
+        LimitLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        MainText = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 600));
+
+        ControlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
+
+        MinimumLabel.setText("Valor mínimo:");
+
+        MinimumTextField.setText("0");
+        MinimumTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                MinimumTextFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                MinimumTextFieldKeyTyped(evt);
+            }
+        });
+
+        MaximumLabel.setText("Valor máximo:");
+
+        MaximumTextField.setText("0");
+        MaximumTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                MaximumTextFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                MaximumTextFieldKeyTyped(evt);
+            }
+        });
+
+        Slider.setMajorTickSpacing(10);
+        Slider.setMaximum(10);
+        Slider.setMinorTickSpacing(2);
+        Slider.setPaintLabels(true);
+        Slider.setPaintTicks(true);
+        Slider.setToolTipText("Umbral de la matriz");
+        Slider.setValue(0);
+        Slider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SliderStateChanged(evt);
+            }
+        });
+
+        ResetButton.setText("Reset");
+        ResetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetButtonActionPerformed(evt);
+            }
+        });
+
+        LimitLabel.setText("Límite:");
+
+        javax.swing.GroupLayout ControlPanelLayout = new javax.swing.GroupLayout(ControlPanel);
+        ControlPanel.setLayout(ControlPanelLayout);
+        ControlPanelLayout.setHorizontalGroup(
+            ControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ControlPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Slider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(ControlPanelLayout.createSequentialGroup()
+                        .addComponent(MinimumLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(MinimumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(MaximumLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(MaximumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ResetButton, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
+                    .addGroup(ControlPanelLayout.createSequentialGroup()
+                        .addComponent(LimitLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        ControlPanelLayout.setVerticalGroup(
+            ControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ControlPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MinimumLabel)
+                    .addComponent(MinimumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MaximumLabel)
+                    .addComponent(MaximumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ResetButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(LimitLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        MainText.setEditable(false);
+        MainText.setColumns(20);
+        MainText.setRows(5);
+        MainText.setBorder(javax.swing.BorderFactory.createTitledBorder("Matriz"));
+        jScrollPane1.setViewportView(MainText);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(ControlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ControlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void MinimumTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MinimumTextFieldKeyReleased
+        minimum = Integer.parseInt(MinimumTextField.getText());
+        Slider.setMinimum(minimum);
+        GenerateMatrix();
+        DisplayMatrix();
+    }//GEN-LAST:event_MinimumTextFieldKeyReleased
+
+    private void MaximumTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaximumTextFieldKeyReleased
+        maximum = Integer.parseInt(MaximumTextField.getText());
+        Slider.setMaximum(maximum);
+        GenerateMatrix();
+        DisplayMatrix();
+    }//GEN-LAST:event_MaximumTextFieldKeyReleased
+
+    private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
+        MinimumTextField.setText("0");
+        minimum = 0;
+        MaximumTextField.setText("0");
+        maximum = 0;
+        ResetSlider();
+        ResetMatrix();
+        MainText.setText("");
+    }//GEN-LAST:event_ResetButtonActionPerformed
+
+    private void MinimumTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MinimumTextFieldKeyTyped
+        CheckInput(evt);
+    }//GEN-LAST:event_MinimumTextFieldKeyTyped
+
+    private void MaximumTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaximumTextFieldKeyTyped
+        CheckInput(evt);
+    }//GEN-LAST:event_MaximumTextFieldKeyTyped
+
+    private void SliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderStateChanged
+        limit = Slider.getValue();
+        DisplayMatrix();
+    }//GEN-LAST:event_SliderStateChanged
+
+    private boolean CheckInput(java.awt.event.KeyEvent evt){
+        char enter = evt.getKeyChar();
+        if(!Character.isDigit(enter)){
+            evt.consume();
+            return false;
+        }
+        return true;
+    }
+    
+    private void ResetSlider(){
+        Slider.setMinimum(0);
+        Slider.setMaximum(10);
+        Slider.setValue(Slider.getMinimum());
+    }
+    
+    private void ResetMatrix(){
+        for (int i = 0; i < 10; i++){
+            for(int j = 0; j < 10; j++){
+                matrix[i][j] = 0;
+            }
+        }
+    }
+    
+    private void DisplayMatrix(){
+        // Check input
+        if (minimum > maximum){
+            MainText.setText("El valor mínimo tiene que ser menor o igual que el máximo.");
+            return;
+        }
+        
+        String result = "\tColumna\n";
+        
+        for(int i = 0; i < 10; i++){
+            result += "\t" + i + "º";
+        }
+        result += "\nFila\n";
+        
+        for (int i = 0; i < 10; i++){
+            result += i + "º";
+            for(int j = 0; j < 10; j++){
+                if(matrix[i][j] <= limit){
+                    result += "\t-";
+                } else{
+                    result += "\t" + matrix[i][j];
+                }
+            }
+            result += "\n";
+        }
+        MainText.setText(result);
+    }
+    
+    private void GenerateMatrix(){
+        for (int i = 0; i < 10; i++){
+            for(int j = 0; j < 10; j++){
+                matrix[i][j] = (int)((Math.random() * ((maximum + 1) - minimum)) + minimum);
+            }
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -79,5 +296,15 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ControlPanel;
+    private javax.swing.JLabel LimitLabel;
+    private javax.swing.JTextArea MainText;
+    private javax.swing.JLabel MaximumLabel;
+    private javax.swing.JTextField MaximumTextField;
+    private javax.swing.JLabel MinimumLabel;
+    private javax.swing.JTextField MinimumTextField;
+    private javax.swing.JButton ResetButton;
+    private javax.swing.JSlider Slider;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
