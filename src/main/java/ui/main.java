@@ -5,6 +5,8 @@
  */
 package ui;
 
+import java.awt.Color;
+
 /**
  *
  * @author izyde
@@ -42,9 +44,9 @@ public class main extends javax.swing.JFrame {
         LimitLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         MainText = new javax.swing.JTextArea();
+        Authors = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 600));
 
         ControlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
@@ -111,7 +113,7 @@ public class main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(MaximumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ResetButton, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
+                        .addComponent(ResetButton, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
                     .addGroup(ControlPanelLayout.createSequentialGroup()
                         .addComponent(LimitLabel)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -140,16 +142,21 @@ public class main extends javax.swing.JFrame {
         MainText.setBorder(javax.swing.BorderFactory.createTitledBorder("Matriz"));
         jScrollPane1.setViewportView(MainText);
 
+        Authors.setText("Desarrollado por: Noah Hernández Morales e Isidro Bermúdez Fernández ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(ControlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ControlPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Authors))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +164,9 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(ControlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Authors)
                 .addContainerGap())
         );
 
@@ -227,9 +236,11 @@ public class main extends javax.swing.JFrame {
     private void DisplayMatrix(){
         // Check input
         if (minimum > maximum){
+            MainText.setForeground(Color.red);
             MainText.setText("El valor mínimo tiene que ser menor o igual que el máximo.");
             return;
         }
+        MainText.setForeground(Color.black);
         
         String result = "\tColumna\n";
         
@@ -296,6 +307,7 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Authors;
     private javax.swing.JPanel ControlPanel;
     private javax.swing.JLabel LimitLabel;
     private javax.swing.JTextArea MainText;
