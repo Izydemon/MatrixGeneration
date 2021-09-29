@@ -94,7 +94,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        LimitLabel.setText("Rango:");
+        LimitLabel.setText("Rango (límite superior de 250):");
 
         javax.swing.GroupLayout ControlPanelLayout = new javax.swing.GroupLayout(ControlPanel);
         ControlPanel.setLayout(ControlPanelLayout);
@@ -129,7 +129,7 @@ public class main extends javax.swing.JFrame {
                     .addComponent(MaximumLabel)
                     .addComponent(MaximumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ResetButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LimitLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,7 +168,7 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(ControlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Authors)
                 .addContainerGap())
@@ -178,19 +178,31 @@ public class main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MinimumTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MinimumTextFieldKeyReleased
-        minimum = Integer.parseInt(MinimumTextField.getText());
-        Slider.setMinimum(minimum);
-        GenerateMatrix();
-        DisplayMatrix();
-        
+        int tempMin = Integer.parseInt(MinimumTextField.getText());
+        if(tempMin != minimum){
+            minimum = tempMin;
+            if(minimum >= 250){
+                Slider.setMinimum(250);
+            } else{
+                Slider.setMinimum(minimum);
+            }
+            GenerateMatrix();
+            DisplayMatrix();
+        }     
     }//GEN-LAST:event_MinimumTextFieldKeyReleased
 
     private void MaximumTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaximumTextFieldKeyReleased
-        maximum = Integer.parseInt(MaximumTextField.getText());
-        Slider.setMaximum(maximum);
-        GenerateMatrix();
-        DisplayMatrix();
-
+        int tempMax = Integer.parseInt(MaximumTextField.getText());
+        if(tempMax != maximum){
+            maximum = tempMax;
+            if(maximum >= 250){
+                Slider.setMaximum(250);
+            } else{
+                Slider.setMaximum(maximum);
+            }
+            GenerateMatrix();
+            DisplayMatrix();
+        }     
     }//GEN-LAST:event_MaximumTextFieldKeyReleased
 
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
@@ -204,14 +216,14 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_ResetButtonActionPerformed
 
     private void MinimumTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MinimumTextFieldKeyTyped
-        if(MinimumTextField.getText().length() == 4){
+        if(MinimumTextField.getText().length() == 3){
             evt.consume();
         }
         CheckInput(evt);
     }//GEN-LAST:event_MinimumTextFieldKeyTyped
 
     private void MaximumTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaximumTextFieldKeyTyped
-        if(MaximumTextField.getText().length() == 4){
+        if(MaximumTextField.getText().length() == 3){
             evt.consume();
         }
         CheckInput(evt);
