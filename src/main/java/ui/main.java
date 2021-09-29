@@ -79,7 +79,7 @@ public class main extends javax.swing.JFrame {
         Slider.setMinorTickSpacing(2);
         Slider.setPaintLabels(true);
         Slider.setPaintTicks(true);
-        Slider.setToolTipText("Umbral de la matriz");
+        Slider.setToolTipText("Rango de la matriz");
         Slider.setValue(0);
         Slider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -94,7 +94,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        LimitLabel.setText("Límite:");
+        LimitLabel.setText("Rango:");
 
         javax.swing.GroupLayout ControlPanelLayout = new javax.swing.GroupLayout(ControlPanel);
         ControlPanel.setLayout(ControlPanelLayout);
@@ -105,18 +105,18 @@ public class main extends javax.swing.JFrame {
                 .addGroup(ControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Slider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(ControlPanelLayout.createSequentialGroup()
+                        .addComponent(LimitLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(ControlPanelLayout.createSequentialGroup()
                         .addComponent(MinimumLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MinimumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(MinimumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(MaximumLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MaximumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ResetButton, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
-                    .addGroup(ControlPanelLayout.createSequentialGroup()
-                        .addComponent(LimitLabel)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(MaximumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(ResetButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         ControlPanelLayout.setVerticalGroup(
@@ -135,6 +135,9 @@ public class main extends javax.swing.JFrame {
                 .addComponent(Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        MinimumTextField.setToolTipText("Valor mínimo en la matriz");
+        MaximumTextField.setToolTipText("Valor máximo en la matriz");
 
         MainText.setEditable(false);
         MainText.setColumns(20);
@@ -155,8 +158,9 @@ public class main extends javax.swing.JFrame {
                     .addComponent(ControlPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Authors))
+                .addContainerGap(300, Short.MAX_VALUE)
+                .addComponent(Authors)
+                .addGap(294, 294, 294))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +168,7 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(ControlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Authors)
                 .addContainerGap())
@@ -178,6 +182,7 @@ public class main extends javax.swing.JFrame {
         Slider.setMinimum(minimum);
         GenerateMatrix();
         DisplayMatrix();
+        
     }//GEN-LAST:event_MinimumTextFieldKeyReleased
 
     private void MaximumTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaximumTextFieldKeyReleased
@@ -185,6 +190,7 @@ public class main extends javax.swing.JFrame {
         Slider.setMaximum(maximum);
         GenerateMatrix();
         DisplayMatrix();
+
     }//GEN-LAST:event_MaximumTextFieldKeyReleased
 
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
