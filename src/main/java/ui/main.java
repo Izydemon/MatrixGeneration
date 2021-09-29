@@ -15,14 +15,16 @@ public class main extends javax.swing.JFrame {
 
     int[][] matrix = new int[10][10];
     int minimum = 0;
-    int maximum = 0;
+    int maximum = 10;
     int limit = 0;
+    
     
     /**
      * Creates new form main
      */
     public main() {
         initComponents();
+        GenerateMatrix();
     }
 
     /**
@@ -64,7 +66,7 @@ public class main extends javax.swing.JFrame {
 
         MaximumLabel.setText("Valor máximo:");
 
-        MaximumTextField.setText("0");
+        MaximumTextField.setText("10");
         MaximumTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 MaximumTextFieldKeyReleased(evt);
@@ -136,8 +138,8 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        MinimumTextField.setToolTipText("Valor mínimo en la matriz");
-        MaximumTextField.setToolTipText("Valor máximo en la matriz");
+        MinimumTextField.setToolTipText("Valor mínimo permitido en la matriz");
+        MaximumTextField.setToolTipText("Valor máximo permitido en la matriz");
 
         MainText.setEditable(false);
         MainText.setColumns(20);
@@ -214,10 +216,10 @@ public class main extends javax.swing.JFrame {
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
         MinimumTextField.setText("0");
         minimum = 0;
-        MaximumTextField.setText("0");
-        maximum = 0;
+        MaximumTextField.setText("10");
+        maximum = 10;
         ResetSlider();
-        ResetMatrix();
+        GenerateMatrix();
         MainText.setText("");
     }//GEN-LAST:event_ResetButtonActionPerformed
 
@@ -256,13 +258,6 @@ public class main extends javax.swing.JFrame {
         Slider.setValue(Slider.getMinimum());
     }
     
-    private void ResetMatrix(){
-        for (int i = 0; i < 10; i++){
-            for(int j = 0; j < 10; j++){
-                matrix[i][j] = 0;
-            }
-        }
-    }
     
     private void DisplayMatrix(){
         // Check input
