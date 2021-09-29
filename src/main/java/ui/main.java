@@ -181,22 +181,28 @@ public class main extends javax.swing.JFrame {
         int tempMin = Integer.parseInt(MinimumTextField.getText());
         if(tempMin != minimum){
             minimum = tempMin;
-            if(minimum >= 250){
+            if(minimum > 250){
                 Slider.setMinimum(250);
+                MainText.setForeground(Color.red);
+                MainText.setText("El valor mínimo tiene que ser menor o igual que 250.");
+                return;
             } else{
                 Slider.setMinimum(minimum);
             }
             GenerateMatrix();
             DisplayMatrix();
-        }     
+        }
     }//GEN-LAST:event_MinimumTextFieldKeyReleased
 
     private void MaximumTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaximumTextFieldKeyReleased
         int tempMax = Integer.parseInt(MaximumTextField.getText());
         if(tempMax != maximum){
             maximum = tempMax;
-            if(maximum >= 250){
+            if(maximum > 250){
                 Slider.setMaximum(250);
+                MainText.setForeground(Color.red);
+                MainText.setText("El valor máximo tiene que ser menor o igual que 250.");
+                return;
             } else{
                 Slider.setMaximum(maximum);
             }
