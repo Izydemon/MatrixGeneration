@@ -204,11 +204,18 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_ResetButtonActionPerformed
 
     private void MinimumTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MinimumTextFieldKeyTyped
+        if(MinimumTextField.getText().length() == 4){
+            evt.consume();
+        }
         CheckInput(evt);
     }//GEN-LAST:event_MinimumTextFieldKeyTyped
 
     private void MaximumTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaximumTextFieldKeyTyped
+        if(MaximumTextField.getText().length() == 4){
+            evt.consume();
+        }
         CheckInput(evt);
+        
     }//GEN-LAST:event_MaximumTextFieldKeyTyped
 
     private void SliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderStateChanged
